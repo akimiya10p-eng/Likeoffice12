@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Akira Miyazaki | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="大阪公立大学 工学部 宮﨑陽のポートフォリオ。">
+  
+  <meta property="og:title" content="Akira Miyazaki Portfolio">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://akimiya10p-eng.github.io/">
+  <meta property="og:image" content="images/profile.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      /* --- Color Palette: Minimal Luxury --- */
+      --bg-main: #FFFFFF;       /* 純粋な白 */
+      --bg-sub: #F8F7F5;        /* ごく薄いベージュグレー */
+      
+      --text-black: #000000;    /* 漆黒 */
+      --text-gray: #555555;     /* チャコールグレー */
+      
+      --accent: #C7B299;        /* 落ち着いたサンドベージュ */
+      
+      --font-en-big: 'Syncopate', sans-serif; /* 巨大見出し用 */
+      --font-jp: 'Noto Sans JP', sans-serif;
+    }
+
+    /* --- Base Setup --- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0; font-family: var(--font-jp); background-color: var(--bg-main);
+      color: var(--text-black); line-height: 1.8; letter-spacing: 0.05em;
+      overflow-x: hidden; /* 横スクロール防止 */
+    }
+
+    a { text-decoration: none; color: inherit; transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+    img { display: block; max-width: 100%; height: auto; }
+    ul { list-style: none; padding: 0; margin: 0; }
+
+    /* Layout Helpers */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative; }
+    .container-wide { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
+    .section-padding { padding: 180px 0; } /* 圧倒的な広い余白 */
+    .t-vertical { writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 0.2em; } /* 縦書き */
+
+    /* Typography */
+    .en-big {
+      font-family: var(--font-en-big); font-weight: 700; text-transform: uppercase;
+      line-height: 1; letter-spacing: -0.02em; color: var(--text-black);
+    }
+    .section-title-wrap { position: relative; margin-bottom: 100px; }
+    .section-title-en { font-size: clamp(4rem, 10vw, 8rem); opacity: 0.08; position: absolute; top: -0.5em; left: 0; z-index: 0; white-space: nowrap; }
+    .section-title-jp { font-size: 2rem; font-weight: 700; position: relative; z-index: 1; }
+    .section-title-jp::after {
+      content: ''; display: block; width: 60px; height: 1px; background: var(--accent); margin-top: 30px;
+    }
+    .text-accent { color: var(--accent); }
+
+    /* Buttons */
+    .btn-link {
+      display: inline-flex; align-items: center; gap: 15px;
+      font-family: var(--font-en-big); font-size: 0.9rem; font-weight: 700;
+      color: var(--text-black); position: relative; padding-bottom: 5px;
+    }
+    .btn-link::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+      background: var(--text-black); transition: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .btn-link:hover::after { width: 100%; }
+    .btn-icon { font-size: 0.8rem; transition: transform 0.5s; }
+    .btn-link:hover .btn-icon { transform: translateX(5px); }
+
+    /* --- Header --- */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 30px 40px; display: flex; justify-content: space-between; align-items: flex-start;
+      mix-blend-mode: difference; /* 背景色に合わせて色を反転させる */
+      color: #fff;
+    }
+    .logo { font-family: var(--font-en-big); font-weight: 700; font-size: 1.2rem; letter-spacing: 0.1em; }
+    nav ul { display: flex; gap: 40px; }
+    nav a { font-family: var(--font-en-big); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; position: relative; }
+    nav a::before {
+      content: ''; position: absolute; top: 50%; left: -15px; width: 8px; height: 1px;
+      background: currentColor; transform: translateY(-50%) scaleX(0); transform-origin: right; transition: 0.3s;
+    }
+    nav a:hover::before { transform: translateY(-50%) scaleX(1); }
+
+    /* --- Hero --- */
+    .hero {
+      height: 100vh; position: relative; overflow: hidden; display: flex; align-items: center;
+    }
+    .hero-bg {
+      position: absolute; top: 0; right: 0; width: 60%; height: 100%;
+      background: url('images/profile.jpg') no-repeat center center/cover;
+      filter: grayscale(100%) contrast(1.1); z-index: 0;
+    }
+    .hero-content {
+      position: relative; z-index: 1; padding-left: 10%; max-width: 80%;
+    }
+    .hero-title-en {
+      font-size: clamp(5rem, 13vw, 10rem); line-height: 0.9; margin-bottom: 40px;
+      text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff; /* 画像と重なった時の視認性確保 */
+    }
+    .hero-title-jp {
+      font-size: 1.5rem; font-weight: 500; margin-bottom: 60px;
+      border-left: 1px solid var(--text-black); padding-left: 30px;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 40px; left: 40px; display: flex; align-items: center; gap: 20px;
+      font-family: var(--font-en-big); font-size: 0.8rem; font-weight: 700; transform: rotate(-90deg); origin: left bottom;
+    }
+    .scroll-line { width: 60px; height: 1px; background: var(--text-black); }
+
+    /* --- About --- */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+      position: relative;
+    }
+    .about-img-wrap { position: relative; z-index: 1; }
+    .about-img { width: 80%; box-shadow: 20px 20px 0 rgba(0,0,0,0.05); filter: grayscale(100%); }
+    
+    .about-content { position: relative; z-index: 2; padding-top: 100px; }
+    /* 縦書きのキャッチコピーを絶対配置で重ねる */
+    .about-vertical-text {
+      position: absolute; top: 0; left: -80px; font-size: 1.8rem; font-weight: 500;
+      color: var(--accent); white-space: nowrap;
+    }
+    .about-desc { font-size: 1.05rem; color: var(--text-gray); margin-bottom: 60px; line-height: 2; }
+    
+    .skill-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
+    .skill-item h4 { font-family: var(--font-en-big); font-size: 0.9rem; margin-bottom: 15px; color: var(--accent); }
+    .skill-item ul li { margin-bottom: 8px; font-size: 0.95rem; color: var(--text-gray); }
+
+    /* --- Works --- */
+    .works-list { display: flex; flex-direction: column; gap: 200px; }
+    .work-item {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center;
+    }
+    .work-item:nth-child(even) { direction: rtl; } /* 偶数番目は左右反転 */
+    .work-item:nth-child(even) .work-content { direction: ltr; }
+
+    .work-img-wrap { overflow: hidden; position: relative; }
+    /* 画像にベージュのオーバーレイをかける */
+    .work-img-wrap::after {
+      content: ''; position: absolute; inset: 0; background: var(--accent);
+      opacity: 0.1; mix-blend-mode: multiply; transition: 0.5s;
+    }
+    .work-img-wrap:hover::after { opacity: 0; }
+    .work-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s ease-out; }
+    .work-img-wrap:hover .work-img { transform: scale(1.05); filter: grayscale(0%); }
+    
+    .work-cat { font-family: var(--font-en-big); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; display: block; }
+    .work-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 30px; line-height: 1.2; }
+    .work-desc { font-size: 1rem; color: var(--text-gray); margin-bottom: 50px; }
+
+    /* --- Process --- */
+    .process-flow { border-left: 1px solid var(--border); padding-left: 60px; }
+    .step-item {
+      position: relative; padding-bottom: 100px;
+    }
+    .step-item::before {
+      content: ''; position: absolute; left: -65px; top: 15px; width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+    }
+    .step-num {
+      font-family: var(--font-en-big); font-size: 3rem; color: var(--accent); opacity: 0.3;
+      position: absolute; top: -20px; left: -140px;
+    }
+    .step-title { font-size: 1.8rem; margin-bottom: 20px; }
+    .step-desc { font-size: 1rem; color: var(--text-gray); max-width: 600px; }
+
+    /* --- Footer --- */
+    footer {
+      background: var(--bg-sub); padding: 150px 0 50px;
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 100px;
+    }
+    .footer-msg { font-size: 3rem; font-weight: 700; line-height: 1.2; }
+    .footer-contact-btn {
+      display: inline-block; padding: 20px 60px; background: var(--text-black); color: #fff;
+      font-family: var(--font-en-big); font-weight: 700; letter-spacing: 0.1em; transition: 0.3s;
+    }
+    .footer-contact-btn:hover { background: var(--accent); }
+    
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(0,0,0,0.1); padding-top: 40px;
+    }
+    .footer-links { display: flex; gap: 30px; }
+    .footer-links a { font-family: var(--font-en-big); font-size: 0.9rem; font-weight: 700; }
+    .copyright { font-size: 0.8rem; color: var(--text-gray); }
+
+    /* --- Animation (GSAP用クラス) --- */
+    .fade-up { opacity: 0; transform: translateY(50px); }
+    .fade-in { opacity: 0; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 25px; }
+      .section-padding { padding: 100px 0; }
+      header { padding: 20px 25px; } nav { display: none; }
+      .hero-bg { width: 100%; opacity: 0.3; } .hero-content { padding-left: 0; max-width: 100%; }
+      .hero-title-jp { border-left: none; padding-left: 0; }
+      .scroll-indicator { display: none; }
+      .about-grid, .work-item, .work-item:nth-child(even) { grid-template-columns: 1fr; direction: ltr; gap: 60px; }
+      .about-vertical-text { position: relative; top: 0; left: 0; writing-mode: horizontal-tb; margin-bottom: 30px; }
+      .skill-list { grid-template-columns: 1fr; gap: 30px; }
+      .process-flow { padding-left: 0; border-left: none; }
+      .step-item::before { display: none; } .step-num { position: relative; top: 0; left: 0; margin-bottom: 10px; }
+      .footer-content { flex-direction: column; gap: 60px; align-items: flex-start; }
+      .footer-msg { font-size: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 30px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">AKIRA.M</div>
+    <nav>
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#works">WORKS</a></li>
+        <li><a href="#process">PROCESS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container-wide hero-content">
+      <h1 class="en-big hero-title-en fade-up">
+        Logic<br>
+        <span class="text-accent">&</span><br>
+        Passion
+      </h1>
+      <p class="hero-title-jp fade-up" style="transition-delay: 0.2s;">
+        論理という骨格に、<br>熱量という血を通わせる。
+      </p>
+      <div class="fade-up" style="transition-delay: 0.4s;">
+        <a href="#works" class="btn-link">
+          VIEW SELECTED WORKS <i class="fas fa-arrow-right btn-icon"></i>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-indicator fade-in" style="transition-delay: 1s;">
+      SCROLL <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <section id="about" class="section-padding">
+    <div class="container">
+      <div class="section-title-wrap fade-up">
+        <span class="en-big section-title-en">Who I Am</span>
+        <h2 class="section-title-jp">私について</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-img-wrap fade-up">
+          <img src="images/profile.jpg" alt="Profile" class="about-img">
+        </div>
+        <div class="about-content fade-up">
+          <p class="t-vertical about-vertical-text">工学とエンタメの境界線で。</p>
+          
+          <p class="about-desc">
+            大阪公立大学 工学部で専攻する「電子物理工学」。そこで培ったのは、物事を構造的に捉え、最適解を導き出す論理的思考力です。<br><br>
+            一方、学園祭実行委員としてのイベント統括や、バンドのフロントマンとしての活動で培ったのは、理屈を超えて人の心を動かす「熱量」の重要性です。<br><br>
+            私は、この相反する二つの視点を行き来し、再現性のあるロジックで、予測不可能な感動を生み出すクリエイションを追求しています。
+          </p>
+
+          <div class="skill-list">
+            <div class="skill-item">
+              <h4>PLANNING</h4>
+              <ul>
+                <li>イベント統括・プロデュース</li>
+                <li>コンセプト設計</li>
+                <li>予算・リソース管理</li>
+              </ul>
+            </div>
+            <div class="skill-item">
+              <h4>LOGIC & DATA</h4>
+              <ul>
+                <li>構造的思考・問題解決</li>
+                <li>データ分析・可視化</li>
+                <li>仮説検証サイクル</li>
+              </ul>
+            </div>
+            <div class="skill-item">
+              <h4>CREATIVE</h4>
+              <ul>
+                <li>作詞作曲・演奏</li>
+                <li>ステージ演出</li>
+                <li>Webスタイリング</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" class="section-padding" style="background:var(--bg-sub);">
+    <div class="container">
+      <div class="section-title-wrap fade-up">
+        <span class="en-big section-title-en">Selected Works</span>
+        <h2 class="section-title-jp">主要な実績</h2>
+      </div>
+
+      <div class="works-list">
+        <div class="work-item">
+          <div class="work-img-wrap fade-up">
+            <img src="images/work-fes-main.jpg" alt="Fes" class="work-img">
+          </div>
+          <div class="work-content fade-up">
+            <span class="work-cat">PRODUCING / MANAGEMENT</span>
+            <h3 class="work-title">学園祭ライブ統括<br>収支構造改革</h3>
+            <p class="work-desc">
+              1000人規模の学園祭ライブ企画を根本から再建。従来の慣習を疑い、データに基づく広告戦略の見直しと、粘り強い出演者交渉を実行。結果、2年連続のチケット完売と黒字化を達成し、持続可能な運営体制を構築しました。
+            </p>
+            <a href="docs/plan_live.pdf" target="_blank" class="btn-link">
+              VIEW DOCUMENT (PDF) <i class="fas fa-arrow-right btn-icon"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-img-wrap fade-up">
+            <img src="images/work-band-main.jpg" alt="Band" class="work-img">
+          </div>
+          <div class="work-content fade-up">
+            <span class="work-cat">ARTIST / PERFORMANCE</span>
+            <h3 class="work-title">バンド活動<br>(Guitar & Vocal)</h3>
+            <p class="work-desc">
+              オリジナル楽曲の作詞作曲から、ライブ当日のステージング、照明演出までをトータルで設計。「どうすれば観客の感情を動かせるか」という、演者としての肌感覚は、すべての企画の根底にある原動力です。
+            </p>
+            <a href="#contact" class="btn-link">
+              REQUEST DEMO <i class="fas fa-arrow-right btn-icon"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-img-wrap fade-up">
+            <img src="images/work-teacher-main.jpg" alt="Teach" class="work-img">
+          </div>
+          <div class="work-content fade-up">
+            <span class="work-cat">EDUCATION / LOGIC</span>
+            <h3 class="work-title">ロジカル指導による<br>家庭教師実績</h3>
+            <p class="work-desc">
+              感覚的な指導ではなく、生徒の誤答データを収集・分析し、つまずきの原因を構造的に特定。オーダーメイドのカリキュラムと可視化された進捗管理により、偏差値を大幅に向上させ、志望校合格へ導きました。
+            </p>
+            <a href="docs/teacher_progress.pdf" target="_blank" class="btn-link">
+              VIEW REPORT (PDF) <i class="fas fa-arrow-right btn-icon"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section-padding">
+    <div class="container">
+      <div class="section-title-wrap fade-up">
+        <span class="en-big section-title-en">My Workflow</span>
+        <h2 class="section-title-jp">思考のプロセス</h2>
+      </div>
+
+      <div class="process-flow">
+        <div class="step-item fade-up">
+          <span class="step-num">01</span>
+          <h3 class="step-title">本質の定義</h3>
+          <p class="step-desc">
+            表面的な事象にとらわれず、「なぜやるのか」「誰のためにやるのか」「何が成功か」という本質的な問いを言語化し、プロジェクトの指針を定めます。
+          </p>
+        </div>
+        <div class="step-item fade-up">
+          <span class="step-num">02</span>
+          <h3 class="step-title">構造化と分解</h3>
+          <p class="step-desc">
+            予算、時間、人員などの有限なリソースを正確に把握。複雑な課題を管理可能なサイズまで構造的に分解し、具体的なアクションプランに落とし込みます。
+          </p>
+        </div>
+        <div class="step-item fade-up">
+          <span class="step-num">03</span>
+          <h3 class="step-title">仮説検証と熱量の注入</h3>
+          <p class="step-desc">
+            論理に基づく仮説検証のサイクルを回しながら、そこにクリエイティブな飛躍と熱量を注入。理屈だけでは到達できない、人の心を動かすアウトプットを目指します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content fade-up">
+        <h2 class="footer-msg">
+          Let's create<br>
+          something<br>
+          extraordinary.
+        </h2>
+        <div>
+          <p style="margin-bottom: 30px; color: var(--text-gray);">
+            共鳴いただける方、<br>ぜひお話ししましょう。
+          </p>
+          <a href="mailto:akimiya10p@gmail.com" class="footer-contact-btn">
+            CONTACT ME
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom fade-up">
+        <div class="logo" style="color:var(--text-black);">AKIRA.M</div>
+        <div class="footer-links">
+          <a href="https://github.com/akimiya10p-eng" target="_blank">GITHUB</a>
+          <a href="https://x.com/Taki_Renya" target="_blank">X (TWITTER)</a>
+        </div>
+        <p class="copyright">© 2025 AKIRA MIYAZAKI.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // フェードアップアニメーション
+    gsap.utils.toArray('.fade-up').forEach((element) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%', // 画面の85%の位置に来たら発火
+          toggleActions: 'play none none none',
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power3.out', // ゆっくりとした上品な動き
+      });
+    });
+
+    // フェードインアニメーション
+    gsap.utils.toArray('.fade-in').forEach((element) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+        opacity: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+      });
+    });
+  </script>
+</body>
+</html>
